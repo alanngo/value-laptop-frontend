@@ -9,7 +9,8 @@ class Usage extends React.Component
   state = 
 	{
 		usage: '0',
-		laptops: []
+    laptops: [],
+    ready: true
 	}
 
   handleClick = (use) =>

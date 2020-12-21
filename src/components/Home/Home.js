@@ -8,10 +8,12 @@ import About from '../about-us/About-us';
 
 class Home extends Component 
 {
+  
 
   render()
   {
     return (
+    
     <div className="bg-dark">
       <Router>
         <div className="Home">
@@ -22,6 +24,11 @@ class Home extends Component
                   <Nav.Link href = "/price"><td><Button variant="primary"><h3>Find a laptop within my budget</h3></Button></td></Nav.Link>
                   <td><div className="gap"></div></td>
                   <Nav.Link href = "/usage"><td><Button variant="success"><h3> Find a laptop that fits my usage</h3></Button></td></Nav.Link>
+                </tr>
+                <tr align="center">
+                  <Nav.Link href = "/"><td><Button variant="danger"><h3>Coming Soon...</h3></Button></td></Nav.Link>
+                  <td><div className="gap"></div></td>
+                  <Nav.Link href = "/"><td><Button variant="warning"><h3> Coming Soon...</h3></Button></td></Nav.Link>
                 </tr>
               </thead>
             </table>
