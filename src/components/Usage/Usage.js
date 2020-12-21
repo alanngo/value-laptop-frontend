@@ -2,7 +2,7 @@ import axios from "axios";
 import React    from "react";
 import  {Button, Table}  from 'react-bootstrap';
 import DisplayLaptop from "../DisplayLaptop/DisplayLaptop";
-import controller from './controller.png'
+// import controller from './controller.png'
 import './Usage.css'
 class Usage extends React.Component 
 {

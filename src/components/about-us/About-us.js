@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardGroup, Button, Table, Jumbotron} from 'react-bootstrap'
+import {Button,  Jumbotron} from 'react-bootstrap'
 import alan from './me2.jpg'
 import omar from './omar.jpg'
 class About extends Component {
@@ -15,7 +15,7 @@ class About extends Component {
 			<table>
 				<tr >
 					<td>
-						<img src={alan} width="250"/>
+						<img src={alan} width="250" alt="alan"/>
 					</td>
 					<td className="align-top">
 						<p>
@@ -37,7 +37,7 @@ class About extends Component {
 			<table>
 				<tr >
 					<td>
-						<img src={omar} width="250"/>
+						<img src={omar} width="250" alt="omar"/>
 					</td>
 					<td className="align-top">
 						<p>
