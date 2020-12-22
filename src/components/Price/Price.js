@@ -16,15 +16,22 @@ class Price extends React.Component
 	handleSearch = (e) => 
 	{
 		e.preventDefault()
-		console.log(this.state.price)
-		const URL = `https://value-laptop-backend.herokuapp.com/laptop/price/${this.state.price}` 
-		axios.get(URL)
-		.then(res =>
+		let regex = new RegExp('[A-z]+')
+		if (regex.test(this.state.price))
+			alert("enter a numeric value")
+		else
 		{
-			// console.log(res.data)
-			this.setState({laptops : Object.values(res.data)})
-			console.log(this.state.laptops)
-		}).catch(err => console.log(err))
+			console.log(this.state.price)
+			const URL = `https://value-laptop-backend.herokuapp.com/laptop/price/${this.state.price}` 
+			axios.get(URL)
+			.then(res =>
+			{
+				// console.log(res.data)
+				this.setState({laptops : Object.values(res.data)})
+				console.log(this.state.laptops)
+			}).catch(err => console.log(err))
+		}
+		
 	}
 
 	render()
@@ -35,7 +42,7 @@ class Price extends React.Component
 			<div align ="center">
 				<form onSubmit = {this.handleSubmit}>
 				<div className="form-group">
-          <h3>How much you wanna spend?</h3>
+          		<h3>How much you wanna spend?</h3>
 					<label>
 						<input
 						className = "form-control" 
@@ -49,9 +56,12 @@ class Price extends React.Component
 				</div>
 				</form>
 			</div>
-			<div>
+			{
+				(this.state.laptops.length<=0)?<p>no laptops found</p>:<div>
 				<DisplayLaptop laptops={this.state.laptops}/>
 			</div>
+			}
+			
 			</>
 		);
 	}
