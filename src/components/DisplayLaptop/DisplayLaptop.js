@@ -1,7 +1,17 @@
 import React    from "react";
 import  {Button, Accordion, Card, Nav}  from 'react-bootstrap';
 
-function DisplayLaptop(props)
+var getCategory = (category) =>
+{
+  switch (category)
+  {
+    case 'gaming': return '🎮'
+    case 'workstation': return '🥇'
+    default: return ''
+  }
+}
+
+var DisplayLaptop = (props) =>
 {
   console.log("DisplayLaptop")
   console.log(props)
@@ -20,7 +30,8 @@ function DisplayLaptop(props)
           as={Button} 
           variant="link" 
           eventKey={laptop._id} >
-            <h3>{laptop.name} :: {laptop.category} - ${laptop.price}</h3>
+
+            <h3 align="left">{laptop.name}  <span className="text-success">${laptop.price} {getCategory(laptop.category)}</span></h3>
           </Accordion.Toggle>
           </div>
         </Card.Header>

@@ -10,6 +10,7 @@ import Footer from './components/footer/Footer';
 // import About from './components/about-us/About-us';
 import Home from './components/Home/Home'
 import logo from './components/logo2.png'
+import { Container } from 'react-bootstrap';
 
 class App extends React.Component
 {
@@ -24,16 +25,18 @@ class App extends React.Component
   render()
   {
     return (
-      <div className="App bg-dark text-light" >
-        <img src={logo} align="center" alt="logo"/>
-        <Home/>
-      
-      <br/>
-  
-      <div align="center">
-        <Footer align="bottom"/>
-      </div>
-      </div>
+      <Container fluid>
+        <div className="App bg-dark text-light" >
+          <a href="/"><img src={logo} align="center" alt="logo" /></a>
+          <Home/>
+        
+        <br/>
+    
+        <div align="center">
+          <Footer align="bottom"/>
+        </div>
+        </div>
+      </Container>
       
     );
   }

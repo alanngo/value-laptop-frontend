@@ -19,10 +19,10 @@ class About extends Component {
 					</td>
 					<td className="align-top">
 						<p>
-							I am a University of Texas at Austin alumnus working @ Infosys with experience in Java, Python, and 
+							I am a University of Texas at Austin alumnus working at Infosys with experience in Java, Python, and 
 							C++ to name a few. I highly believe in learning new things and solving problems 
 							to enrich one's mind and then sharing it with other people so that they can share in the intellectual endavour. 
-							Aside from learning new things, I also dedicate time for different hobbies that I love such a hanging out, sleeping,
+							Aside from learning new things, I also dedicate time for different hobbies that I love such a hanging out, hiking,
 							rock climbing, building PCs, playing games and coding for fun. 
 						</p>
 					</td>
