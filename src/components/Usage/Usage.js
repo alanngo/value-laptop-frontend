@@ -1,6 +1,6 @@
 import axios from "axios";
 import React    from "react";
-import  {Button, Table}  from 'react-bootstrap';
+import  {Button, Table, Spinner}  from 'react-bootstrap';
 import DisplayLaptop from "../DisplayLaptop/DisplayLaptop";
 // import controller from './controller.png'
 import './Usage.css'
@@ -10,12 +10,13 @@ class Usage extends React.Component
 	{
 		usage: '0',
     laptops: [],
-    ready: true
+    clicked: false
 	}
 
   handleClick = (use) =>
   {
     console.log(use)
+    this.setState({clicked: true})
     const URL = `https://value-laptop-backend.herokuapp.com/laptop/category/${use}` 
     axios.get(URL)
 	.then(res =>
@@ -50,9 +51,17 @@ class Usage extends React.Component
         
       </Table>
 		
-		<div>
-			<DisplayLaptop laptops={this.state.laptops} />
-		</div>
+			{
+				(this.state.clicked === false)?<></>:
+				(this.state.laptops.length<=0)?
+				<> 
+					<Spinner animation="border" variant="primary" />
+				</>
+				:
+				<div>
+					<DisplayLaptop laptops={this.state.laptops}/>
+				</div>
+			}
       
       </>
     )

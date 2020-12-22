@@ -1,6 +1,7 @@
 import React from "react";
 import DisplayLaptop from "../DisplayLaptop/DisplayLaptop";
 import axios from 'axios';
+import { Spinner } from "react-bootstrap";
 
 class Price extends React.Component 
 {
@@ -8,7 +9,8 @@ class Price extends React.Component
 	state = 
 	{
 		price: '0',
-		laptops: []
+		laptops: [],
+		clicked: false
 	}
 
 	onChange = (event) => this.setState({price: event.target.value}, () => console.log("price: "+ this.state.price))		
@@ -16,6 +18,7 @@ class Price extends React.Component
 	handleSearch = (e) => 
 	{
 		e.preventDefault()
+		this.setState({clicked: true})
 		let regex = new RegExp('[A-z]+')
 		if (regex.test(this.state.price))
 			alert("enter a numeric value")
@@ -56,10 +59,17 @@ class Price extends React.Component
 				</div>
 				</form>
 			</div>
+			
 			{
-				(this.state.laptops.length<=0)?<p>no laptops found</p>:<div>
-				<DisplayLaptop laptops={this.state.laptops}/>
-			</div>
+				(this.state.clicked === false)?<></>:
+				(this.state.laptops.length<=0)?
+				<> 
+					<Spinner animation="border" variant="primary" />
+				</>
+				:
+				<div>
+					<DisplayLaptop laptops={this.state.laptops}/>
+				</div>
 			}
 			
 			</>
