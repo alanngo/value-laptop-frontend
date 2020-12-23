@@ -36,11 +36,11 @@ class Usage extends React.Component
         <thead>
           <tr>
             <td><Button onClick = {() => this.handleClick("general")} variant="light"><h5>
-              I'm a typical person who needs a laptop
+              I need something for general use
             </h5></Button><br/></td>
             <td><div className="gap"></div></td>
             <td><Button onClick = {() => this.handleClick("gaming")} variant="light"><h5>
-              I am a gamer who really values FPS🎮
+              I'm a gamer who plays on a regular basis🎮
             </h5></Button><br/></td>
             <td><div className="gap"></div></td>
             <td><Button onClick = {() => this.handleClick("workstation")} variant="light"> <h5>

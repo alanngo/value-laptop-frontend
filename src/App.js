@@ -27,8 +27,9 @@ class App extends React.Component
     return (
       <Container fluid>
         <div className="App bg-dark text-light" >
-          <a href="/"><img src={logo} align="center" alt="logo" /></a>
-          <Home/>
+        <a href="/"><img src={logo} alt="logo" /></a>
+        <br/>
+        <Home/>
         
         <br/>
     

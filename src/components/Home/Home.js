@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import {Button, Nav, Container} from "react-bootstrap"
+import {Button, Nav, Row, Col} from "react-bootstrap"
 import { Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import Price from '../Price/Price';
 import Usage from '../Usage/Usage'
@@ -13,10 +13,22 @@ class Home extends Component
     return (
     
     <div className="bg-dark">
-      <Container fluid>
         <Router>
-         
-          <div className="Home">
+          <Row>
+            <Col>
+              <Nav.Link href = "/price"><Button variant="primary"><h4>Find a laptop within my budget</h4></Button></Nav.Link>
+            </Col>
+            <Col>
+              <Nav.Link href = "/usage"><Button variant="success"><h4> Find a laptop that fits my usage</h4></Button></Nav.Link>
+            </Col>
+            <Col>
+              <Nav.Link href = "/"><Button variant="danger"><h4>Coming Soon...</h4></Button></Nav.Link>
+            </Col>
+            <Col>
+              <Nav.Link href = "/"><Button variant="warning"><h4> Coming Soon...</h4></Button></Nav.Link>
+            </Col>
+          </Row>
+          {/* <div className="Home">
               <br/>
               <table align="center" className="choices">
                 <thead>
@@ -34,7 +46,7 @@ class Home extends Component
               </table>
             
             
-          </div>
+          </div> */}
   
         <Switch>
           <Route path="/price" exact component = {Price}/>
@@ -42,7 +54,6 @@ class Home extends Component
           <Route path="/about" exact component = {About}/>
         </Switch>
         </Router>
-      </Container>
       </div>
     )
   }
