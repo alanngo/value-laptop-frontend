@@ -12,7 +12,7 @@ import gtx from './gtx.png'
 import quadro from './quadro.png'
 
 // get images and details
-var getProcessorInfo = (proc, alternate, link, w) =><a href={link}><img src = {proc} alt={alternate} width={w}/></a>
+var getProcessorInfo = (proc, alternate, link, w) =><a href={link}  target="_blank" rel="noreferrer"><img src = {proc} alt={alternate} width={w}/></a>
 
 var getCPU = (cpu, w) => 
 {
@@ -122,8 +122,8 @@ var DisplayLaptop = (props) =>
                           <td>{laptop.gpu}</td>
                         </tr>
                         <tr>
-                          <td>{(laptop.links.amazon==="")?<></>:<Nav.Link href={laptop.links.amazon}><Button variant="warning"><h6>Buy From Amazon</h6></Button></Nav.Link>}</td>
-                          <td>{(laptop.links.newegg==="")?<></>:<Nav.Link href={laptop.links.newegg}><Button variant="info"><h6>Buy From Newegg</h6></Button></Nav.Link>}</td>
+                          <td>{(laptop.links.amazon==="")?<></>:<Nav.Link href={laptop.links.amazon} target="_blank" rel="noreferrer"><Button variant="warning"><h6>Buy From Amazon</h6></Button></Nav.Link>}</td>
+                          <td>{(laptop.links.newegg==="")?<></>:<Nav.Link href={laptop.links.newegg} target="_blank" rel="noreferrer"><Button variant="info"><h6>Buy From Newegg</h6></Button></Nav.Link>}</td>
                         </tr>
                     </Table>
                   </Card.Text>
