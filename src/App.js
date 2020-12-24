@@ -9,7 +9,7 @@ import React    from "react";
 import Footer from './components/footer/Footer';
 // import About from './components/about-us/About-us';
 import Home from './components/Home/Home'
-import logo from './components/logo2.png'
+import logo from './components/logo.png'
 import { Container } from 'react-bootstrap';
 
 class App extends React.Component
