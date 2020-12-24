@@ -1,5 +1,33 @@
 import React    from "react";
 import  {Button, Accordion, Card, Nav, CardColumns, Table}  from 'react-bootstrap';
+import r5 from './ryzen5.png'
+import r7 from './ryzen7.png'
+import i5 from './i5.png'
+import i7 from './i7.png'
+import rtx from './rtx.png'
+import gtx from './gtx.png'
+import quadro from './quadro.png'
+
+// get images and details
+var getProcessorInfo = (proc, alternate, link, w) =><a href={link}><img src = {proc} alt={alternate} width={w}/></a>
+
+var getCPU = (cpu, w) => 
+{
+  if (cpu.includes('i5')) return getProcessorInfo(i5, "i5", "https://en.wikichip.org/wiki/intel/core_i5", w)
+  if (cpu.includes('i7')) return getProcessorInfo(i7, "i7","https://en.wikichip.org/wiki/intel/core_i7", w)
+  if (cpu.includes('r5') || cpu.includes('Ryzen 5') || cpu.includes('ryzen 5')) 
+      return getProcessorInfo(r5, "r5", "https://en.wikichip.org/wiki/amd/ryzen_5", w)
+  if (cpu.includes('r7') || cpu.includes('Ryzen 7') || cpu.includes('ryzen 7')) 
+      return getProcessorInfo(r7, "r7", "https://en.wikichip.org/wiki/amd/ryzen_7", w)
+}
+
+
+var getGPU = (gpu, w) =>
+{
+  if (gpu.includes('quadro') || gpu.includes('Quadro')) return getProcessorInfo(quadro, 'quadro', "https://en.wikipedia.org/wiki/Quadro", 70)
+  if ((gpu.includes('20') || gpu.includes ('30')) && !(gpu.includes("MX"))) return getProcessorInfo(rtx, "rtx", "https://en.wikipedia.org/wiki/GeForce_20_series", w)
+  if ((gpu.includes('10') || gpu.includes ('16')) && !(gpu.includes("MX"))) return getProcessorInfo(gtx, "gtx", "https://en.wikipedia.org/wiki/GeForce", w)
+}
 
 var getTB = (size) => 
 {
@@ -92,12 +120,14 @@ var DisplayLaptop = (props) =>
                   </Card.Text>
                 </Card.Body>
               </Accordion.Collapse>
+              <Card.Footer> {getCPU(laptop.cpu, "70")} {getGPU(laptop.gpu, "200")}</Card.Footer>
             </Card>
         </>
         
         )})
       }
       </CardColumns>
+      
     </Accordion>
 
     </div>
