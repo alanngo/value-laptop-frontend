@@ -2,8 +2,11 @@ import React    from "react";
 import  {Button, Accordion, Card, Nav, CardColumns, Table}  from 'react-bootstrap';
 import r5 from './ryzen5.png'
 import r7 from './ryzen7.png'
+import r9 from './ryzen9.png'
 import i5 from './i5.png'
 import i7 from './i7.png'
+import i9 from './i9.png'
+import xeon from './xeon.png'
 import rtx from './rtx.png'
 import gtx from './gtx.png'
 import quadro from './quadro.png'
@@ -13,12 +16,18 @@ var getProcessorInfo = (proc, alternate, link, w) =><a href={link}><img src = {p
 
 var getCPU = (cpu, w) => 
 {
+  // intel
   if (cpu.includes('i5')) return getProcessorInfo(i5, "i5", "https://en.wikichip.org/wiki/intel/core_i5", w)
   if (cpu.includes('i7')) return getProcessorInfo(i7, "i7","https://en.wikichip.org/wiki/intel/core_i7", w)
+  if (cpu.includes('i9')) return getProcessorInfo(i9, "i9","https://en.wikichip.org/wiki/intel/core_i9", w)
+  if (cpu.includes('xeon') || (cpu.includes('Xeon'))) return getProcessorInfo(xeon, "xeon","https://en.wikichip.org/wiki/intel/xeon", w)
+  //amd
   if (cpu.includes('r5') || cpu.includes('Ryzen 5') || cpu.includes('ryzen 5')) 
       return getProcessorInfo(r5, "r5", "https://en.wikichip.org/wiki/amd/ryzen_5", w)
   if (cpu.includes('r7') || cpu.includes('Ryzen 7') || cpu.includes('ryzen 7')) 
       return getProcessorInfo(r7, "r7", "https://en.wikichip.org/wiki/amd/ryzen_7", w)
+  if (cpu.includes('r9') || cpu.includes('Ryzen 9') || cpu.includes('ryzen 9')) 
+    return getProcessorInfo(r9, "r9", "https://en.wikichip.org/wiki/amd/ryzen_9", w)
 }
 
 
