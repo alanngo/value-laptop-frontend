@@ -33,7 +33,7 @@ var getCPU = (cpu, w) =>
 
 var getGPU = (gpu, w) =>
 {
-  if (gpu.includes('quadro') || gpu.includes('Quadro')) return getProcessorInfo(quadro, 'quadro', "https://en.wikipedia.org/wiki/Quadro", "250")
+  if (gpu.includes('quadro') || gpu.includes('Quadro')) return getProcessorInfo(quadro, 'quadro', "https://en.wikipedia.org/wiki/Quadro", w)
   if ((gpu.includes('20') || gpu.includes ('30')) && !(gpu.includes("MX"))) return getProcessorInfo(rtx, "rtx", "https://en.wikipedia.org/wiki/GeForce_20_series", w)
   if ((gpu.includes('10') || gpu.includes ('16')) && !(gpu.includes("MX"))) return getProcessorInfo(gtx, "gtx", "https://en.wikipedia.org/wiki/GeForce", w)
 }
