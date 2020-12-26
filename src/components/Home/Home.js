@@ -21,7 +21,7 @@ class Home extends Component
               <Nav.Link href = "/price"><Button variant="danger"><h4>Find laptop by price</h4></Button></Nav.Link>
             </Col>
             <Col>
-              <Nav.Link href = "/usage"><Button variant="warning"><h4>Find laptop by usage</h4></Button></Nav.Link>
+              <Nav.Link href = "/usage"><Button variant="warning"><h4>Find laptop by use</h4></Button></Nav.Link>
             </Col>
             <Col>
               <Nav.Link href = "/cpu"><Button variant="primary"><h4>Find laptop by CPU</h4></Button></Nav.Link>
