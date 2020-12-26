@@ -64,7 +64,7 @@ class Price extends React.Component
 				(this.state.clicked === false)?<></>:
 				(this.state.laptops.length<=0)?
 				<> 
-					<Spinner animation="border" variant="primary" />
+					<Spinner animation="border" variant="info" />
 				</>
 				:
 				<div>

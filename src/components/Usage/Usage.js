@@ -1,6 +1,6 @@
 import axios from "axios";
 import React    from "react";
-import  {Button, Table, Spinner}  from 'react-bootstrap';
+import  {DropdownButton, Dropdown, Spinner}  from 'react-bootstrap';
 import DisplayLaptop from "../DisplayLaptop/DisplayLaptop";
 // import controller from './controller.png'
 import './Usage.css'
@@ -12,12 +12,12 @@ class Usage extends React.Component
     laptops: [],
     clicked: false
 	}
-
-  handleClick = (use) =>
+  onChange = (event) =>
   {
-    console.log(use)
+    console.log(event)
+    this.setState({usage: event}, () => console.log("usage: "+ this.state.usage))
     this.setState({clicked: true})
-    const URL = `https://value-laptop-backend.herokuapp.com/laptop/category/${use}` 
+    const URL = `https://value-laptop-backend.herokuapp.com/laptop/category/${event}` 
     axios.get(URL)
 	.then(res =>
 	{
@@ -32,30 +32,22 @@ class Usage extends React.Component
     return(
       <>
       <br/>
-      <Table striped borderless hover variant="dark">
-        <thead>
-          <tr>
-            <td><Button onClick = {() => this.handleClick("general")} variant="light"><h5>
-              I need something for general use
-            </h5></Button><br/></td>
-            <td><div className="gap"></div></td>
-            <td><Button onClick = {() => this.handleClick("gaming")} variant="light"><h5>
-              I'm a gamer who plays on a regular basis🎮
-            </h5></Button><br/></td>
-            <td><div className="gap"></div></td>
-            <td><Button onClick = {() => this.handleClick("workstation")} variant="light"> <h5>
-              I'm an enthusiast who needs the best😎
-            </h5></Button><br/></td>
-          </tr>
-        </thead>
-        
-      </Table>
-		
+      <DropdownButton 
+      id="dropdown-basic-button" 
+      title="I need a laptop for... " 
+      variant="light"
+      size="lg"
+      onSelect={this.onChange}>
+        <Dropdown.Item eventKey="general">Office/School</Dropdown.Item>
+        <Dropdown.Item eventKey="gaming">Gaming </Dropdown.Item>
+        <Dropdown.Item eventKey="workstation">High-End work</Dropdown.Item>
+      </DropdownButton>
+      <br/>        
 			{
 				(this.state.clicked === false)?<></>:
 				(this.state.laptops.length<=0)?
 				<> 
-					<Spinner animation="border" variant="primary" />
+					<Spinner animation="border" variant="info" />
 				</>
 				:
 				<div>
