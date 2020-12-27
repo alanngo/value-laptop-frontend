@@ -1,5 +1,6 @@
 import React    from "react";
 import  {Button, Accordion, Card, Nav, CardColumns, Table}  from 'react-bootstrap';
+
 import r5 from './ryzen5.png'
 import r7 from './ryzen7.png'
 import r9 from './ryzen9.png'
@@ -7,9 +8,14 @@ import i5 from './i5.png'
 import i7 from './i7.png'
 import i9 from './i9.png'
 import xeon from './xeon.png'
+
+import mx from './mx.png'
 import rtx from './rtx.png'
 import gtx from './gtx.png'
 import quadro from './quadro.png'
+
+import radeon from './radeon.png'
+import vega from './vega.jpg'
 
 // get images and details
 var getProcessorInfo = (proc, alternate, link, w) =><a href={link}  target="_blank" rel="noreferrer"><img src = {proc} alt={alternate} width={w}/></a>
@@ -21,21 +27,27 @@ var getCPU = (cpu, w) =>
   if (cpu.includes('i7')) return getProcessorInfo(i7, "i7","https://en.wikichip.org/wiki/intel/core_i7", w)
   if (cpu.includes('i9')) return getProcessorInfo(i9, "i9","https://en.wikichip.org/wiki/intel/core_i9", w)
   if (cpu.includes('xeon') || (cpu.includes('Xeon'))) return getProcessorInfo(xeon, "xeon","https://en.wikichip.org/wiki/intel/xeon", w)
+  
   //amd
-  if (cpu.includes('r5') || cpu.includes('Ryzen 5') || cpu.includes('ryzen 5')) 
-      return getProcessorInfo(r5, "r5", "https://en.wikichip.org/wiki/amd/ryzen_5", w)
-  if (cpu.includes('r7') || cpu.includes('Ryzen 7') || cpu.includes('ryzen 7')) 
-      return getProcessorInfo(r7, "r7", "https://en.wikichip.org/wiki/amd/ryzen_7", w)
-  if (cpu.includes('r9') || cpu.includes('Ryzen 9') || cpu.includes('ryzen 9')) 
-    return getProcessorInfo(r9, "r9", "https://en.wikichip.org/wiki/amd/ryzen_9", w)
+  if (cpu.match(/(Ryzen 5|r5)/i)) return getProcessorInfo(r5, "r5", "https://en.wikichip.org/wiki/amd/ryzen_5", w)
+  if (cpu.match(/(Ryzen 7|r7)/i)) return getProcessorInfo(r7, "r7", "https://en.wikichip.org/wiki/amd/ryzen_7", w)
+  if (cpu.match(/(Ryzen 9|r9)/i)) return getProcessorInfo(r9, "r9", "https://en.wikichip.org/wiki/amd/ryzen_9", w)
 }
 
 
 var getGPU = (gpu, w) =>
 {
-  if (gpu.includes('quadro') || gpu.includes('Quadro')) return getProcessorInfo(quadro, 'quadro', "https://en.wikipedia.org/wiki/Quadro", w)
-  if ((gpu.includes('20') || gpu.includes ('30')) && !(gpu.includes("MX"))) return getProcessorInfo(rtx, "rtx", "https://en.wikipedia.org/wiki/GeForce_20_series", w)
-  if ((gpu.includes('10') || gpu.includes ('16')) && !(gpu.includes("MX"))) return getProcessorInfo(gtx, "gtx", "https://en.wikipedia.org/wiki/GeForce", w)
+  // amd cards
+  if (gpu.match(/vega/i)) return getProcessorInfo(vega, 'vega', 'https://en.wikipedia.org/wiki/Radeon_RX_Vega_series', '60')
+  if (!gpu.match(/(10|16)(50|60|70|80)/i)&&gpu.match(/(5|6)(60|70|80)/i)) 
+    return getProcessorInfo(radeon, 'radeon', 'https://en.wikipedia.org/wiki/Radeon', w)
+  
+  // nvidia cards
+  if (gpu.match(/mx/i)) return getProcessorInfo(mx, 'mx', 'https://en.wikipedia.org/wiki/Nvidia', '70')
+  if (gpu.match(/quadro/i)) return getProcessorInfo(quadro, 'quadro', "https://en.wikipedia.org/wiki/Quadro", w)
+  if (gpu.match(/(10|16)(50|60|70|80)/i)) return getProcessorInfo(gtx, "gtx", "https://en.wikipedia.org/wiki/GeForce", w)
+  if (gpu.match(/(20|30)(50|60|70|80)/i)) return getProcessorInfo(rtx, "rtx", "https://en.wikipedia.org/wiki/GeForce_20_series", w)
+
 }
 
 var getTB = (size) => 
