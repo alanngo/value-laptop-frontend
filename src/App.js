@@ -9,7 +9,6 @@ import React    from "react";
 import Footer from './components/footer/Footer';
 // import About from './components/about-us/About-us';
 import Home from './components/Home/Home'
-import logo from './components/logo.png'
 import { Container } from 'react-bootstrap';
 
 class App extends React.Component
@@ -27,7 +26,6 @@ class App extends React.Component
     return (
       <Container fluid>
         <div className="App bg-dark text-light" >
-        <a href="/"><img src={logo} alt="logo" /></a>
         <br/>
         <Home/>
         
