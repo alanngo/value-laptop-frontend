@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import { Nav, Navbar, NavDropdown} from "react-bootstrap"
+import { Nav, Navbar} from "react-bootstrap"
 import { Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import FindLaptop from '../FindLaptop/FindLaptop'
 import Price from '../Price/Price';
@@ -43,6 +43,7 @@ class Home extends Component
           <Route path="/cpu" exact component = {CPU}/>
           <Route path="/gpu" exact component = {GPU}/>
           <Route path="/about" exact component = {About}/>
+          <Route component={FindLaptop} path='*' />
         </Switch>
         </Router>
       </div>
