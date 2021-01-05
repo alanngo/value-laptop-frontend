@@ -51,6 +51,7 @@ class FindLaptop extends Component
   handleClick = (e) => 
   {
     e.preventDefault()
+    this.setState({searchCount: 1})
     this.setState({clicked: true})
     const URL = `https://value-laptop-backend.herokuapp.com/laptop/`
     const BODY = this.state.criteria
@@ -240,6 +241,7 @@ class FindLaptop extends Component
   {
     if (this.state.searchCount<0)
       return <><p>no laptops found😢</p></>
+      
     if (this.state.clicked===false)
       return <></>
     if (this.state.laptops.length<=0)
