@@ -1,0 +1,10 @@
+{
+  "name": {"$regex": ".*", "$options":"i"},
+  "cpu": {"$regex": ".*", "$options":"i"},
+  "ram": { "$lte": 128, "$gte": 8},
+
+  "gpu": {"$regex": ".*", "$options":"i"},
+
+  "price":{"$lte": 1000},
+  "category": {"$regex": ".*", "$options":"i"}
+}
