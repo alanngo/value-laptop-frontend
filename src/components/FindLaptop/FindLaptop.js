@@ -252,7 +252,7 @@ class FindLaptop extends Component
   {
     return (
       <div className="FindLaptop">
-      <h1> Find a laptop</h1>
+
       
         {this.renderForm()}
         <br/>
