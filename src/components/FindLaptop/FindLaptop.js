@@ -6,7 +6,7 @@ import DisplayLaptop from '../DisplayLaptop'
 const STRING_SEARCH = (arg0) => ({$regex: `${arg0}`, $options:"i"})
 const RANGE = (begin, end) =>({ "$lte": Number(end), "$gte": Number(begin)})
 const PRICE = (arg0) => ({$lte: Number(arg0)})
-const CATEGORY = (elem) => 
+const CHIP_TYPE = (elem) => 
 {
   if (elem.includes("MX")||elem.includes("vega")) return "budget"
   if (elem.includes("50")) return "entry level"
@@ -15,6 +15,12 @@ const CATEGORY = (elem) =>
   if (elem.includes("80") || elem.match(/(i9|ryzen 9)/i)) return "enthusiast"
   if (elem.includes("Quadro") || elem.match(/(xeon|threadripper)/i)) return "workstation"
 }
+const USE_TYPE = (elem) => 
+({
+  "School/Office":"general",
+  "I'm a gamer": "gaming",
+  "High-end usage": "workstation"
+})[elem]
 
 //laptop parts 
 const INTEL = ["i5", "i7", "i9", "xeon"]
@@ -22,6 +28,7 @@ const RYZEN = ["Ryzen 5", "Ryzen 7", "Ryzen 9"]
 const NVIDIA = ["MX", "1050", "1650", "1060",  "1660", "2060", "1070",  "2070", "1080",  "2080", "Quadro"]
 const AMD = ["vega", "560"]
 const RAM = [8, 16, 32, 64]
+const USAGE = ["School/Office", "I'm a gamer", "High-end usage"]
 
 class FindLaptop extends Component 
 {
@@ -41,7 +48,8 @@ class FindLaptop extends Component
     clicked: false,
     dropDownCPU: "Choose a CPU",
     dropDownGPU: "Choose a GPU",
-    dropDownRAM:"Choose a Memory config",
+    dropDownRAM:"Choose RAM size",
+    dropDownUsage: "Use case",
     elapsedTime: 0, 
     searchCount: 0
   }
@@ -156,14 +164,14 @@ class FindLaptop extends Component
               <Dropdown.Item eventKey="i" onClick={() => this.changeValue("dropDownCPU","Intel")}>Intel</Dropdown.Item>
               <Dropdown.Divider />
               {
-                INTEL.map(elem =><Dropdown.Item eventKey={elem} onClick={() => this.changeValue("dropDownCPU",`Intel ${elem} `)}>{elem} ({CATEGORY(elem)})</Dropdown.Item>)
+                INTEL.map(elem =><Dropdown.Item eventKey={elem} onClick={() => this.changeValue("dropDownCPU",`Intel ${elem} `)}>{elem} ({CHIP_TYPE(elem)})</Dropdown.Item>)
               }
             
             <Dropdown.Divider />
             <Dropdown.Item eventKey="ryzen" onClick={() => this.changeValue("dropDownCPU","AMD Ryzen")}>AMD</Dropdown.Item>
             <Dropdown.Divider />
             {
-              RYZEN.map(elem =><Dropdown.Item eventKey={elem} onClick={() => this.changeValue("dropDownCPU",`AMD ${elem}`)}>{elem} ({CATEGORY(elem)})</Dropdown.Item>)
+              RYZEN.map(elem =><Dropdown.Item eventKey={elem} onClick={() => this.changeValue("dropDownCPU",`AMD ${elem}`)}>{elem} ({CHIP_TYPE(elem)})</Dropdown.Item>)
             }
             </Dropdown.Menu>
             </Dropdown>
@@ -193,17 +201,19 @@ class FindLaptop extends Component
               <Dropdown.Item eventKey={this.handleCompany(NVIDIA)} onClick={() => this.changeValue("dropDownGPU","Nvidia")}>Nvidia</Dropdown.Item>
               <Dropdown.Divider />
               {
-                NVIDIA.map(elem =><Dropdown.Item eventKey={elem} onClick={() => this.changeValue("dropDownGPU",`Nvidia ${elem} `)}>{elem} ({CATEGORY(elem)})</Dropdown.Item>)
+                NVIDIA.map(elem =><Dropdown.Item eventKey={elem} onClick={() => this.changeValue("dropDownGPU",`Nvidia ${elem} `)}>{elem} ({CHIP_TYPE(elem)})</Dropdown.Item>)
               }
             
             <Dropdown.Divider />
             <Dropdown.Item eventKey={this.handleCompany(AMD)} onClick={() => this.changeValue("dropDownGPU","AMD Radeon")}>AMD</Dropdown.Item>
             <Dropdown.Divider />
-            {AMD.map(elem =><Dropdown.Item eventKey={elem} onClick={() => this.changeValue("dropDownGPU",`AMD ${elem}`)}>{elem} ({CATEGORY(elem)})</Dropdown.Item>)}
+            {AMD.map(elem =><Dropdown.Item eventKey={elem} onClick={() => this.changeValue("dropDownGPU",`AMD ${elem}`)}>{elem} ({CHIP_TYPE(elem)})</Dropdown.Item>)}
             </Dropdown.Menu>
             </Dropdown>
           </Col>
-          <Col>
+        </Form.Group>
+        <Form.Group as={Row}>
+        <Col>
           <Dropdown as={ButtonGroup} size="lg" id="bg-vertical-dropdown-1" variant="primary" 
             onSelect=
             {
@@ -229,6 +239,31 @@ class FindLaptop extends Component
               <Dropdown.Item eventKey={1024} onClick={() => this.changeValue("dropDownRAM", "All RAM")}>Any</Dropdown.Item>
               <Dropdown.Divider />
               {RAM.map(elem =><Dropdown.Item eventKey={elem} onClick={() => this.changeValue("dropDownRAM",`${elem} GB`)}>{elem} GB</Dropdown.Item>)}
+            </Dropdown.Menu>
+            </Dropdown>
+          </Col>
+          <Col>
+          <Dropdown as={ButtonGroup} size="lg" id="bg-vertical-dropdown-1" variant="primary" 
+            onSelect=
+            {
+              (event) =>
+              {
+                console.log(event)
+                let category = event
+                let criteria = this.state.criteria
+                criteria.category = STRING_SEARCH(category)
+                this.setState
+                ({criteria: criteria},
+                  () => console.log(criteria)
+                )
+              }
+            } >
+            <Dropdown.Toggle split variant="light" id="dropdown-split-basic">{this.state.dropDownUsage}</Dropdown.Toggle>
+            <Dropdown.Menu>
+            <Dropdown.Divider />
+              <Dropdown.Item eventKey=".*" onClick={() => this.changeValue("dropDownUsage", "All Uses")}>Any</Dropdown.Item>
+              <Dropdown.Divider />
+              {USAGE.map(elem =><Dropdown.Item eventKey={USE_TYPE(elem)} onClick={() => this.changeValue("dropDownUsage",`${elem}`)}>{elem}</Dropdown.Item>)}
             </Dropdown.Menu>
             </Dropdown>
           </Col>

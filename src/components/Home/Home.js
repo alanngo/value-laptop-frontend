@@ -3,10 +3,6 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 // import { Nav, Navbar} from "react-bootstrap"
 import { Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import FindLaptop from '../FindLaptop/FindLaptop'
-import Price from '../Price/Price';
-import Usage from '../Usage/Usage';
-import CPU from '../CPU/CPU';
-import GPU from '../GPU/GPU';
 import About from '../about-us/About-us';
 // import logo from '../logo3.png'
 import Welcome from '../Welcome/Welcome';
@@ -39,10 +35,6 @@ class Home extends Component
   
         <Switch>
           <Route path="/laptops" exact component = {FindLaptop}/>
-          <Route path="/price" exact component = {Price}/>
-          <Route path="/usage" exact component = {Usage}/>
-          <Route path="/cpu" exact component = {CPU}/>
-          <Route path="/gpu" exact component = {GPU}/>
           <Route path="/about" exact component = {About}/>
           <Route component={Welcome} path='*' />
         </Switch>
