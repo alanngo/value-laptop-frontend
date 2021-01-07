@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Carousel, Button} from 'react-bootstrap'
-import laptop from "./laptop.jpg"
+import laptop from "./laptop.png"
+import peripheral from './peripheral.png'
 
 const WELCOME_SCREEN = 
 [
@@ -11,13 +12,13 @@ const WELCOME_SCREEN =
     buttonText: "Find a Laptop",
     alt: "I"
   },
-  // {
-  //   img: "",
-  //   link: "/laptops",
-  //   caption:"Amp up your workflow with the best",
-  //   buttonText: "Get Started",
-  //   alt: "II"
-  // },
+  {
+    img: peripheral,
+    link: "/",
+    caption:"Amp up your workflow with the best",
+    buttonText: "Coming soon",
+    alt: "II"
+  },
   // {
   //   img: "",
   //   link: "/laptops",
@@ -46,7 +47,6 @@ class Welcome extends Component
                 />
               </a>
               <Carousel.Caption>
-                <h1>{elem.caption}</h1>
                 <a href={elem.link} ><Button variant="light"><h4>{elem.buttonText}</h4></Button></a>
               </Carousel.Caption>
             </Carousel.Item>)

@@ -46,10 +46,10 @@ class FindLaptop extends Component
     },
 		laptops: [],
     clicked: false,
-    dropDownCPU: "Choose a CPU",
-    dropDownGPU: "Choose a GPU",
-    dropDownRAM:"Choose RAM size",
-    dropDownUsage: "Use case",
+    dropDownCPU: "CPU",
+    dropDownGPU: "GPU",
+    dropDownRAM:"RAM",
+    dropDownUsage: "Usage",
     elapsedTime: 0, 
     searchCount: 0
   }
@@ -268,7 +268,7 @@ class FindLaptop extends Component
             </Dropdown>
           </Col>
         </Form.Group>
-      <Button variant="success" onClick={this.handleClick}>Search</Button>
+      <Button variant="success" onClick={this.handleClick}><h4>Search🔍</h4></Button>
       
   </Form>)
   }
