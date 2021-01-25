@@ -141,7 +141,6 @@ var DisplayLaptop = (props) =>
               </Accordion.Toggle>
             </Card>
         </>
-        
         )})
       }
       </CardColumns>

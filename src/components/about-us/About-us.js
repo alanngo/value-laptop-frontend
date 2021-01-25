@@ -35,7 +35,7 @@ class About extends Component
 		let url = `https://api.github.com/repos/alanngo/value-laptop-frontend/collaborators`
 		axios.get(url, 
 			{
-				headers:{'Authorization': 'Bearer 1c57e3e46945c4ae01f792b704947ce46af3504c '}
+				headers:{'Authorization': 'Bearer 3da7f5ef18b02750ebab84dd64c23cf1746d1bfb'}
 			})
 			.then(res =>this.setState({developers: Object.values(res.data)})		)
 			.catch(err => console.log(err))
@@ -50,7 +50,7 @@ class About extends Component
 			this.state.developers.map(elem =>
 			{
 				return (
-				<Card bg="dark">
+				<Card bg="dark" key={elem.id}>
 				<Card.Header as="h5">{ABOUT[elem.login].name}</Card.Header>
 				
 				<Card.Body>
