@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Button,  Card,  CardDeck} from 'react-bootstrap'
-import axios from 'axios'
+import alan from './me2.jpg'
+import omar from './omar.jpg'
+
 
 const ABOUT = 
 {
@@ -8,6 +10,8 @@ const ABOUT =
 	{
 		name:"Alan Ngo",
 		linkedin:"https://www.linkedin.com/in/alan-ngo-77338a150/",
+		img: alan,
+		gh:"https://github.com/alanngo",
 		desc:"I am a University of Texas at Austin alumnus working at Infosys with"+ 
 		"experience in Java, Python, and C++ to name a few. I highly believe in learning new things and"+
 		"solving problems to enrich one's mind and then sharing it with other people so that they can share"+
@@ -18,6 +22,8 @@ const ABOUT =
 	{
 		name: "Omar Belkady",
 		linkedin:"https://www.linkedin.com/in/omar-belkady/",
+		img: omar,
+		gh: "https://github.com/omarbelkady",
 		desc:"I am a Junior Student at the University Of Texas At Austin pursuing Computer Engineering and Finance." +
 		"I enjoy learning and teaching others about programming and STEM. I fell in love with programming ever since" + 
 		"I was 13 where I would watch IT personal in my mom’s office do the work in addition to my school’s tech people staying" + 
@@ -26,40 +32,25 @@ const ABOUT =
 }
 class About extends Component 
 {
-	state = 
-	{
-		developers: []
-	}
-	componentDidMount() 
-	{
-		let url = `https://api.github.com/repos/alanngo/value-laptop-frontend/collaborators`
-		axios.get(url, 
-			{
-				headers:{'Authorization': 'Bearer  28e3a1ad1e68c7d839c93e5e585fb0f69171b80a'}
-			})
-			.then(res =>this.setState({developers: Object.values(res.data)})		)
-			.catch(err => console.log(err))
-	}
-
   render()
   {
     return (
 		<>
 		<CardDeck>
 		{
-			this.state.developers.map(elem =>
+			Object.keys(ABOUT).map(elem =>
 			{
 				return (
 				<Card bg="dark" key={elem.id}>
-				<Card.Header as="h5">{ABOUT[elem.login].name}</Card.Header>
+				<Card.Header as="h5">{ABOUT[elem].name}</Card.Header>
 				
 				<Card.Body>
-				<img align="top" src={elem.avatar_url} width={'200'} alt={elem.id}/>
+				<img align="top" src={ABOUT[elem].img} width={'200'} alt={elem.id}/>
 				<br/>
 				<br/>
-				<Card.Text>{ABOUT[elem.login].desc}</Card.Text>
-				<Button variant="light" href={elem.html_url}>Github</Button>
-				<Button variant="primary" href={ABOUT[elem.login].linkedin}>Linkedin</Button>
+				<Card.Text>{ABOUT[elem].desc}</Card.Text>
+				<Button variant="light" href={ABOUT[elem].gh}>Github</Button>
+				<Button variant="primary" href={ABOUT[elem].linkedin}>Linkedin</Button>
 				</Card.Body>
 				</Card>
 				)
