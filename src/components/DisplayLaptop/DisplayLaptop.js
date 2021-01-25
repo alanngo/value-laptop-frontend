@@ -83,17 +83,12 @@ var DisplayLaptop = (props) =>
         return (
         <>           
             <Card className="bg-dark">
-              
             <Accordion.Toggle
               as={Button} 
                 variant="link" 
                 eventKey={laptop._id}>
             <Card.Header><h3>{getCategory(laptop.category)} {laptop.name} <span className="text-success">${laptop.price}</span></h3></Card.Header>
-
                 <Card.Img variant="top" src={laptop.links.image} />
-              </Accordion.Toggle>
-
-
               <Accordion.Collapse eventKey={laptop._id}>
                 <Card.Body>
                   <Card.Title></Card.Title>
@@ -141,7 +136,9 @@ var DisplayLaptop = (props) =>
                   </Card.Text>
                 </Card.Body>
               </Accordion.Collapse>
+
               <Card.Footer> {getCPU(laptop.cpu, "70")} {getGPU(laptop.gpu, "200")}</Card.Footer>
+              </Accordion.Toggle>
             </Card>
         </>
         

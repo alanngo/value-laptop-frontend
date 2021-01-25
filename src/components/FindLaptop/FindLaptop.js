@@ -106,8 +106,8 @@ class FindLaptop extends Component
     return (<Form onSubmit={this.handleClick}>
       <Form.Group as={Row}>
         <Col>
-        <Form.Label>Name</Form.Label>
-          <Form.Control placeholder=" Laptop Name" 
+        <Form.Label>Keywords</Form.Label>
+          <Form.Control placeholder="Know the company?" 
           onChange= {(event)=>
           {
             let name = event.target.value
@@ -122,9 +122,9 @@ class FindLaptop extends Component
         </Col>
         <Col>
         <Form.Label>
-          Max Price
+          My Budget
         </Form.Label>
-          <Form.Control placeholder=" Laptop Price" 
+          <Form.Control placeholder="How much you wanna spend?" 
           onChange= {(event)=>
           {
             let price = event.target.value
