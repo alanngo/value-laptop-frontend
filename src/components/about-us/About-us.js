@@ -35,7 +35,7 @@ class About extends Component
 		let url = `https://api.github.com/repos/alanngo/value-laptop-frontend/collaborators`
 		axios.get(url, 
 			{
-				headers:{'Authorization': 'Bearer 3da7f5ef18b02750ebab84dd64c23cf1746d1bfb'}
+				headers:{'Authorization': 'Bearer  28e3a1ad1e68c7d839c93e5e585fb0f69171b80a'}
 			})
 			.then(res =>this.setState({developers: Object.values(res.data)})		)
 			.catch(err => console.log(err))
