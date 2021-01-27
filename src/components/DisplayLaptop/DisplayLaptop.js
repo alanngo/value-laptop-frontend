@@ -81,7 +81,7 @@ var DisplayLaptop = (props) =>
       props.laptops.map(laptop => 
       {
         return (
-        <>           
+        <>   
             <Card className="bg-dark">
             <Accordion.Toggle
               as={Button} 

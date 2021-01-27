@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Spinner, Button, Form, Row, Col, Dropdown, ButtonGroup} from 'react-bootstrap'
+import './FindLaptop.css'
+import {Spinner, Button, Form, Row, Col, Dropdown, ButtonGroup, Pagination} from 'react-bootstrap'
 import DisplayLaptop from '../DisplayLaptop'
 
 const STRING_SEARCH = (arg0) => ({$regex: `${arg0}`, $options:"i"})
@@ -59,7 +60,10 @@ class FindLaptop extends Component
     dropDownRAM:"RAM",
     dropDownUsage: "Usage",
     elapsedTime: 0, 
-    searchCount: 0
+    searchCount: 0,
+    first: 0,
+    last: 9,
+    curr: 1
   }
 
   changeValue = (key, value)=> this.setState({[`${key}`]: value})
@@ -85,6 +89,7 @@ class FindLaptop extends Component
       }
         
     }).catch(err => console.log(err))
+    .then(() => console.log(this.state))
 
   }
 
@@ -105,7 +110,7 @@ class FindLaptop extends Component
     return resString
   }
   
-
+// render related
   renderForm  = () =>
   {
     return (<Form onSubmit={this.handleClick}>
@@ -286,8 +291,112 @@ class FindLaptop extends Component
     if (this.state.laptops.length<=0)
       return <Spinner animation="border" variant="info"/>
 
-    return <DisplayLaptop laptops={this.state.laptops}/>
+    
+    return (
+    <>
+    <DisplayLaptop laptops={this.state.laptops.slice
+    (
+      this.state.first,
+      this.state.last)}/>
+    </>
+    )
 
+  }
+
+  getPageNumbers()
+  {
+    let ret = []
+    for (let i =0; i<this.state.laptops.length/9; i++) 
+      ret.push(i + 1)
+    return ret
+  }
+  getPageInterval(page)
+  {
+    let ret = []
+    // switch(page)
+    // {
+    //   case (1): return {first: 0, last: 9} // inc, exc
+    //   case (2): return {first: 9, last: 18}
+    //   case (2): return {first: 18, last: 27}
+    //   // first: (page - 1) * page  page + 8
+    // }
+    let a = 0; 
+    let b = 9;
+    for (let i =1; i<=page; i++)
+    {
+      if (i!==1)
+      {
+        a=b
+        b=a + 9
+        ret[i] ={first: a, last: b}
+      }
+      else
+        ret[i] ={first: a, last: b}
+    }
+    console.log(ret)
+    return ret
+  }
+  displayPagination()
+  {
+    let pages = this.getPageNumbers()
+    return (
+      <div className="pagination">
+        <Pagination >
+
+            <Pagination.Prev disabled={this.state.curr<=1} onClick={() => 
+            {
+              let tmp0 = this.state.first
+              let tmp1 = this.state.last
+              let marker = this.state.curr
+              this.setState(
+                {
+                first: tmp0-9, 
+                last: tmp1-9,
+                curr: marker-1
+                })
+            }}/>
+            {
+              pages.map(page=> <Pagination.Item disabled={this.state.curr===page} key={page} onClick={() => 
+              {
+                let table= this.getPageInterval(page)
+                console.log("page: "+this.state.curr)
+                this.setState(
+                  {
+                    first: table[page].first,  
+                    last: table[page].last ,
+                    curr: page
+                  }, () =>
+                  {
+                    console.log(this.state.first)
+                    console.log(this.state.last)
+                    console.log(this.state.curr)
+                  }
+                )
+
+              }}>{page}</Pagination.Item>)
+            }
+            <Pagination.Next disabled={this.state.curr>=pages.length} onClick={() => 
+            {
+              let tmp0 = this.state.first
+              let tmp1 = this.state.last
+              let marker = this.state.curr
+              this.setState(
+              {
+                first: tmp0+9, 
+                last: tmp1+9,
+                curr: marker+1
+              }, () =>
+              {
+                console.log(this.state.first)
+                console.log(this.state.last)
+                console.log(this.state.curr)
+              })
+
+            }}/>
+
+          </Pagination>
+          </div>
+    )
   }
   render()
   {
@@ -298,6 +407,8 @@ class FindLaptop extends Component
         {this.renderForm()}
         <br/>
         {this.conditionalDisplay()}
+        <br/>
+        {this.displayPagination()}
       </div>
     )
   }
