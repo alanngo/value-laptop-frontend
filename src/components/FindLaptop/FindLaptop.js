@@ -5,7 +5,15 @@ import DisplayLaptop from '../DisplayLaptop'
 
 const STRING_SEARCH = (arg0) => ({$regex: `${arg0}`, $options:"i"})
 const RANGE = (begin, end) =>({ "$lte": Number(end), "$gte": Number(begin)})
-const PRICE = (arg0) => ({$lte: Number(arg0)})
+const PRICE = (arg0) => 
+{
+  if (!arg0) return {$gte: Number(0)}
+
+  let suffix = arg0.charAt(arg0.length-1)
+  let prefix = arg0.substr(0, arg0.length-1)
+  if (suffix==='K' || suffix==='k') return {$lte: Number(prefix) *1000}
+  return {$lte: Number(arg0)}
+}
 const CHIP_TYPE = (elem) => 
 {
   if (elem.includes("MX")||elem.includes("vega")) return "budget"
@@ -41,7 +49,7 @@ class FindLaptop extends Component
       cpu: STRING_SEARCH('.*'),
       ram: RANGE(8, 128),
       gpu: STRING_SEARCH('.*'),
-      price: {$gte: 0},
+      price: PRICE(0),
       category: STRING_SEARCH('.*')
     },
 		laptops: [],
@@ -63,19 +71,16 @@ class FindLaptop extends Component
     this.setState({clicked: true})
     const URL = `https://value-laptop-backend.herokuapp.com/laptop/`
     const BODY = this.state.criteria
-    let start = Date.now()
-
     axios.post(URL, BODY)
     .then(res => 
     {
       console.log(res.data)
-      let end = Date.now() - start
-      console.log(end)
       this.setState({laptops: Object.values(res.data)})
       if (Object.values(res.data).length <=0)
       {
         this.setState({searchCount: -1})
         console.log("no data")
+        console.log(this.state)
         alert("No laptops found with given input")
       }
         
@@ -269,7 +274,6 @@ class FindLaptop extends Component
           </Col>
         </Form.Group>
       <Button variant="success" onClick={this.handleClick}><h4>Search🔍</h4></Button>
-      
   </Form>)
   }
   conditionalDisplay = ()=>
