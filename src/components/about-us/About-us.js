@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button,  Card,  CardDeck} from 'react-bootstrap'
+import {Button,  Card,  CardDeck, Container} from 'react-bootstrap'
 import alan from './me2.jpg'
 import omar from './omar.jpg'
 
@@ -36,12 +36,13 @@ class About extends Component
   {
     return (
 		<>
+		<Container fluid>
 		<CardDeck>
 		{
 			Object.keys(ABOUT).map(elem =>
 			{
 				return (
-				<Card bg="dark" key={elem.id}>
+				<Card bg="light" key={elem.id}>
 				<Card.Header as="h5">{ABOUT[elem].name}</Card.Header>
 				
 				<Card.Body>
@@ -49,7 +50,7 @@ class About extends Component
 				<br/>
 				<br/>
 				<Card.Text>{ABOUT[elem].desc}</Card.Text>
-				<Button variant="light" href={ABOUT[elem].gh}>Github</Button>
+				<Button variant="dark" href={ABOUT[elem].gh}>Github</Button>
 				<Button variant="primary" href={ABOUT[elem].linkedin}>Linkedin</Button>
 				</Card.Body>
 				</Card>
@@ -58,6 +59,7 @@ class About extends Component
 			
 		}
 		</CardDeck>
+		</Container>
         </>
     )
   }

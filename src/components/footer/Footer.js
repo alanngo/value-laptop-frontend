@@ -8,7 +8,7 @@ class Footer extends Component
   {
     return (
       <div className="Footer" align="center">
-          <Nav className="bg-dark justify-content-center">
+          <Nav className="bg-light justify-content-center">
           <Nav.Item>
               <Nav.Link href="/">Home</Nav.Link>
             </Nav.Item>

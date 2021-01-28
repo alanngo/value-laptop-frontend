@@ -14,7 +14,7 @@ class Home extends Component
   {
     return (
     
-    <div className="bg-dark">
+    <div className="">
         <Router>
         {/* <Navbar collapseOnSelect expand="lg" bg="dark" variant="light">
           <Navbar.Brand href="/">

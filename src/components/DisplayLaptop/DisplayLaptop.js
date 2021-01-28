@@ -1,6 +1,6 @@
 import React    from "react";
 import  {Button, Accordion, Card, Nav, CardColumns, Table}  from 'react-bootstrap';
-
+import "./DisplayLaptop.css"
 import r5 from './ryzen5.png'
 import r7 from './ryzen7.png'
 import r9 from './ryzen9.png'
@@ -75,25 +75,27 @@ var DisplayLaptop = (props) =>
   console.log("Render")
   return (
     <div>
-    <Accordion className="bg-dark">
+    <Accordion className="bg-light">
       <CardColumns> 
       {
       props.laptops.map(laptop => 
       {
         return (
         <>   
-            <Card className="bg-dark">
+            <Card className="bg-light">
             <Accordion.Toggle
               as={Button} 
                 variant="link" 
                 eventKey={laptop._id}>
             <Card.Header><h3>{getCategory(laptop.category)} {laptop.name} <span className="text-success">${laptop.price}</span></h3></Card.Header>
-                <Card.Img variant="top" src={laptop.links.image} />
+                <div className="laptop">
+                  <Card.Img variant="top" src={laptop.links.image} />
+                </div>
               <Accordion.Collapse eventKey={laptop._id}>
                 <Card.Body>
                   <Card.Title></Card.Title>
                   <Card.Text>
-                    <Table borderless className="text-light">
+                    <Table borderless className="text-dark">
                         <tr> 
                           <td><h5> CPU</h5></td>
                           <td>{laptop.cpu}</td>

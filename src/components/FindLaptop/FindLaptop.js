@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import './FindLaptop.css'
-import {Spinner, Button, Form, Row, Col, Dropdown, ButtonGroup, Pagination} from 'react-bootstrap'
+import {Spinner, Button, Form, Row, Col, Dropdown, ButtonGroup, Pagination, Container} from 'react-bootstrap'
 import DisplayLaptop from '../DisplayLaptop'
 
 const STRING_SEARCH = (arg0) => ({$regex: `${arg0}`, $options:"i"})
@@ -176,7 +176,7 @@ class FindLaptop extends Component
                 )
               }
             } >
-            <Dropdown.Toggle split variant="light" id="dropdown-split-basic">{this.state.dropDownCPU}</Dropdown.Toggle>
+            <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic">{this.state.dropDownCPU}</Dropdown.Toggle>
             <Dropdown.Menu>
             <Dropdown.Divider />
               <Dropdown.Item eventKey=".*" onClick={() => this.changeValue("dropDownCPU","All CPUs")}>All CPUs</Dropdown.Item>
@@ -213,7 +213,7 @@ class FindLaptop extends Component
                 )
               }
             } >
-            <Dropdown.Toggle split variant="light" id="dropdown-split-basic">{this.state.dropDownGPU}</Dropdown.Toggle>
+            <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic">{this.state.dropDownGPU}</Dropdown.Toggle>
             <Dropdown.Menu>
             <Dropdown.Divider />
               <Dropdown.Item eventKey=".*" onClick={() => this.changeValue("dropDownGPU", "All GPUs")}>All GPU</Dropdown.Item>
@@ -254,7 +254,7 @@ class FindLaptop extends Component
                 )
               }
             } >
-            <Dropdown.Toggle split variant="light" id="dropdown-split-basic">{this.state.dropDownRAM}</Dropdown.Toggle>
+            <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic">{this.state.dropDownRAM}</Dropdown.Toggle>
             <Dropdown.Menu>
             <Dropdown.Divider />
               <Dropdown.Item eventKey={1024} onClick={() => this.changeValue("dropDownRAM", "All RAM")}>Any</Dropdown.Item>
@@ -279,7 +279,7 @@ class FindLaptop extends Component
                 )
               }
             } >
-            <Dropdown.Toggle split variant="light" id="dropdown-split-basic">{this.state.dropDownUsage}</Dropdown.Toggle>
+            <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic">{this.state.dropDownUsage}</Dropdown.Toggle>
             <Dropdown.Menu>
             <Dropdown.Divider />
               <Dropdown.Item eventKey=".*" onClick={() => this.changeValue("dropDownUsage", "All Uses")}>Any</Dropdown.Item>
@@ -409,11 +409,15 @@ class FindLaptop extends Component
   {
     return (
       <div className="FindLaptop">
+        <Container fluid>
         {this.renderForm()}
         <br/>
         {this.conditionalDisplay()}
         <br/>
-        {this.displayPagination()}
+        {
+          (this.state.laptops.length===0)?<></>:
+        this.displayPagination()}
+        </Container>
       </div>
     )
   }
