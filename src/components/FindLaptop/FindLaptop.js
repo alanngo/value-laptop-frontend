@@ -31,6 +31,14 @@ const USE_TYPE = (elem) =>
   "High-end usage": "workstation"
 })[elem]
 
+const WORKLOAD = (ram) =>
+({
+  8:"minimum multitasking",
+  16: "standard multitasking",
+  32:"Industry-grade workflow",
+  64:"No compromises"
+})[ram]
+
 //laptop parts 
 const INTEL = ["i5", "i7", "i9", "xeon"]
 const RYZEN = ["Ryzen 5", "Ryzen 7", "Ryzen 9"] 
@@ -38,39 +46,42 @@ const NVIDIA = ["MX", "1050", "1650", "1060",  "1660", "2060", "1070",  "2070", 
 const AMD = ["vega", "560"]
 const RAM = [8, 16, 32, 64]
 const USAGE = ["School/Office", "I'm a gamer", "High-end usage"]
+const DEFAULT_STATE=	{
+  criteria: 
+  {
+    name: STRING_SEARCH('.*'),
+    cpu: STRING_SEARCH('.*'),
+    ram: RANGE(8, 128),
+    gpu: STRING_SEARCH('.*'),
+    price: PRICE(0),
+    category: STRING_SEARCH('.*')
+  },
+  laptops: [],
+  clicked: false,
+  dropDownCPU: "CPU",
+  dropDownGPU: "GPU",
+  dropDownRAM:"RAM",
+  dropDownUsage: "Usage",
+  elapsedTime: 0, 
+  searchCount: 0,
+  first: 0,
+  last: 9,
+  curr: 1
+}
 
 class FindLaptop extends Component 
 {
-  
-  state = 
-	{
-    criteria: 
-    {
-      name: STRING_SEARCH('.*'),
-      cpu: STRING_SEARCH('.*'),
-      ram: RANGE(8, 128),
-      gpu: STRING_SEARCH('.*'),
-      price: PRICE(0),
-      category: STRING_SEARCH('.*')
-    },
-		laptops: [],
-    clicked: false,
-    dropDownCPU: "CPU",
-    dropDownGPU: "GPU",
-    dropDownRAM:"RAM",
-    dropDownUsage: "Usage",
-    elapsedTime: 0, 
-    searchCount: 0,
-    first: 0,
-    last: 9,
-    curr: 1
-  }
+  state = DEFAULT_STATE
 
   changeValue = (key, value)=> this.setState({[`${key}`]: value})
 
   handleClick = (e) => 
   {
     e.preventDefault()
+
+    // reset every time
+    this.setState(DEFAULT_STATE)
+
     this.setState({searchCount: 1})
     this.setState({clicked: true})
     const URL = `https://value-laptop-backend.herokuapp.com/laptop/`
@@ -248,7 +259,7 @@ class FindLaptop extends Component
             <Dropdown.Divider />
               <Dropdown.Item eventKey={1024} onClick={() => this.changeValue("dropDownRAM", "All RAM")}>Any</Dropdown.Item>
               <Dropdown.Divider />
-              {RAM.map(elem =><Dropdown.Item eventKey={elem} onClick={() => this.changeValue("dropDownRAM",`${elem} GB`)}>{elem} GB</Dropdown.Item>)}
+              {RAM.map(elem =><Dropdown.Item eventKey={elem} onClick={() => this.changeValue("dropDownRAM",`${elem} GB`)}>{elem} GB ({WORKLOAD(elem)})</Dropdown.Item>)}
             </Dropdown.Menu>
             </Dropdown>
           </Col>
@@ -303,6 +314,7 @@ class FindLaptop extends Component
 
   }
 
+  // pagination
   getPageNumbers()
   {
     let ret = []
@@ -313,13 +325,7 @@ class FindLaptop extends Component
   getPageInterval(page)
   {
     let ret = []
-    // switch(page)
-    // {
-    //   case (1): return {first: 0, last: 9} // inc, exc
-    //   case (2): return {first: 9, last: 18}
-    //   case (2): return {first: 18, last: 27}
-    //   // first: (page - 1) * page  page + 8
-    // }
+
     let a = 0; 
     let b = 9;
     for (let i =1; i<=page; i++)
@@ -398,12 +404,11 @@ class FindLaptop extends Component
           </div>
     )
   }
+
   render()
   {
     return (
       <div className="FindLaptop">
-
-      
         {this.renderForm()}
         <br/>
         {this.conditionalDisplay()}
