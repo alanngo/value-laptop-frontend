@@ -43,7 +43,7 @@ var getGPU = (gpu, w) =>
     return getProcessorInfo(radeon, 'radeon', 'https://en.wikipedia.org/wiki/Radeon', w)
   
   // nvidia cards
-  if (gpu.match(/mx/i)) return getProcessorInfo(mx, 'mx', 'https://en.wikipedia.org/wiki/Nvidia', '70')
+  if (gpu.match(/mx/i)) return getProcessorInfo(mx, 'mx', 'https://en.wikipedia.org/wiki/Nvidia', w)
   if (gpu.match(/quadro/i)) return getProcessorInfo(quadro, 'quadro', "https://en.wikipedia.org/wiki/Quadro", w)
   if (gpu.match(/(10|16)(50|60|70|80)/i)) return getProcessorInfo(gtx, "gtx", "https://en.wikipedia.org/wiki/GeForce", w)
   if (gpu.match(/(20|30)(50|60|70|80)/i)) return getProcessorInfo(rtx, "rtx", "https://en.wikipedia.org/wiki/GeForce_20_series", w)
@@ -139,7 +139,7 @@ var DisplayLaptop = (props) =>
                 </Card.Body>
               </Accordion.Collapse>
 
-              <Card.Footer> {getCPU(laptop.cpu, "70")} {getGPU(laptop.gpu, "200")}</Card.Footer>
+              <Card.Footer> {getCPU(laptop.cpu, "70")} {getGPU(laptop.gpu, "70")}</Card.Footer>
               </Accordion.Toggle>
             </Card>
         </>
