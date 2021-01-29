@@ -12,11 +12,11 @@ const ABOUT =
 		linkedin:"https://www.linkedin.com/in/alan-ngo-77338a150/",
 		img: alan,
 		gh:"https://github.com/alanngo",
-		desc:"I am a University of Texas at Austin alumnus working at Infosys with"+ 
-		"experience in Java, Python, and C++ to name a few. I highly believe in learning new things and"+
-		"solving problems to enrich one's mind and then sharing it with other people so that they can share"+
-		"in the intellectual endavour. Aside from learning new things, I also dedicate time for different"+
-		"hobbies that I love such a hanging out, hiking, rock climbing, building PCs, playing games and coding for fun."	
+		desc:"I am a University of Texas at Austin alumnus working at Infosys with "+ 
+		"experience in Java, Python, and C++ to name a few. I highly believe in learning new things and "+
+		"solving problems to enrich one's mind and then sharing it with other people so that they can share "+
+		"in the intellectual endavour. Aside from learning new things, I also dedicate time for different "+
+		"hobbies that I love such a hanging out, hiking, rock climbing, building PCs, playing games and coding for fun. "	
 	},
 	"omarbelkady": 
 	{
@@ -24,9 +24,9 @@ const ABOUT =
 		linkedin:"https://www.linkedin.com/in/omar-belkady/",
 		img: omar,
 		gh: "https://github.com/omarbelkady",
-		desc:"I am a Junior Student at the University Of Texas At Austin pursuing Computer Engineering and Finance." +
-		"I enjoy learning and teaching others about programming and STEM. I fell in love with programming ever since" + 
-		"I was 13 where I would watch IT personal in my mom’s office do the work in addition to my school’s tech people staying" + 
+		desc:"I am a Junior Student at the University Of Texas At Austin pursuing Computer Engineering and Finance. " +
+		"I enjoy learning and teaching others about programming and STEM. I fell in love with programming ever since " + 
+		"I was 13 where I would watch IT personal in my mom’s office do the work in addition to my school’s tech people staying " + 
 		"in front of the computer all day. I love learning about new technologies which emerge every now and then because it always amazes me."	
 	}
 }

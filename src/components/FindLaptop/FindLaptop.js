@@ -78,10 +78,6 @@ class FindLaptop extends Component
   handleClick = (e) => 
   {
     e.preventDefault()
-
-    // reset every time
-    this.setState(DEFAULT_STATE)
-
     this.setState({searchCount: 1})
     this.setState({clicked: true})
     const URL = `https://value-laptop-backend.herokuapp.com/laptop/`
@@ -90,19 +86,46 @@ class FindLaptop extends Component
     .then(res => 
     {
       console.log(res.data)
-      this.setState({laptops: Object.values(res.data)})
+      this.setState({laptops: Object.values(res.data)}, () => console.log(this.state.criteria))
       if (Object.values(res.data).length <=0)
       {
         this.setState({searchCount: -1})
         console.log("no data")
         console.log(this.state)
-        alert("No laptops found with given input")
+        alert(`No laptops found with given input`)
       }
         
     }).catch(err => console.log(err))
-    .then(() => console.log(this.state))
+    
 
   }
+
+handleReset = (e) => 
+{
+  e.preventDefault()
+  console.log("inside reset")
+  this.setState(  {criteria: 
+    {
+      name: STRING_SEARCH('.*'),
+      cpu: STRING_SEARCH('.*'),
+      ram: RANGE(8, 128),
+      gpu: STRING_SEARCH('.*'),
+      price: PRICE(0),
+      category: STRING_SEARCH('.*')
+    },
+    laptops: [],
+    clicked: false,
+    dropDownCPU: "CPU",
+    dropDownGPU: "GPU",
+    dropDownRAM:"RAM",
+    dropDownUsage: "Usage",
+    elapsedTime: 0, 
+    searchCount: 0,
+    first: 0,
+    last: 9,
+    curr: 1}, ()=>console.log(this.state.criteria))
+  
+}
 
   handleCompany = (company) => 
   {
@@ -124,7 +147,7 @@ class FindLaptop extends Component
 // render related
   renderForm  = () =>
   {
-    return (<Form onSubmit={this.handleClick}>
+    return (<Form onSubmit={this.handleClick} onReset={this.handleReset}>
       <Form.Group as={Row}>
         <Col>
         <Form.Label>Keywords</Form.Label>
@@ -289,7 +312,8 @@ class FindLaptop extends Component
             </Dropdown>
           </Col>
         </Form.Group>
-      <Button variant="success" onClick={this.handleClick}><h4>Search🔍</h4></Button>
+        {/* <Button variant="primary" onClick={this.handleReset}><h4>Reset🔄</h4></Button>{'  '} */}
+        {'  '}<Button variant="success" onClick={this.handleClick}><h4>Search🔍</h4></Button>
   </Form>)
   }
   conditionalDisplay = ()=>
