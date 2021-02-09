@@ -28,7 +28,7 @@ class App extends React.Component
         <div className="App bg-light text-dark">
       
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-  <Navbar.Brand href="/">Lightning Laptop</Navbar.Brand>
+  <Navbar.Brand href="/">🌩️ Lightning Laptop</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">

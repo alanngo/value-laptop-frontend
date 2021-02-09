@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Carousel, Button} from 'react-bootstrap'
 import laptop from "./laptop.png"
 import peripheral from './peripheral.png'
+import techhelp from './techhelp.png'
 
 const WELCOME_SCREEN = 
 [
@@ -18,15 +19,17 @@ const WELCOME_SCREEN =
     link: "/",
     caption:"Powerful Peripherals",
     buttonText: "Coming soon",
+    color: "primary",
     alt: "II"
   },
-  // {
-  //   img: "",
-  //   link: "/laptops",
-  //   caption:"Amp up your workflow with the best",
-  //   buttonText: "Get Started",
-  //   alt: "III"
-  // }
+  {
+    img: techhelp,
+    link: "/",
+    caption:"Get Tech Support",
+    buttonText: "Coming Soon",
+    color: "danger",
+    alt: "III"
+  }
 ]
 class Welcome extends Component 
 {
