@@ -10,6 +10,7 @@
 
 # production
 /build
+.theia/
 
 # misc
 .DS_Store
